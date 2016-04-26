@@ -9,7 +9,7 @@ o.init = function(text, disableUpdate, disableDraw, disableMouse)
 	o.noDraw = disableDraw or false
 	o.noMouse = disableMouse or false
 	o.obsolete = false
-	o.btnOkay = o.guiMenu.newButton(W.getWidth()/2, W.getHeight()*0.75, 66, 42, "OK")
+	o.btnOkay = o.guiMenu.newButton(G.getWidth()/2, G.getHeight()*0.75, 66, 42, "OK")
 end
 
 o.update = function(dt)
@@ -23,8 +23,8 @@ o.update = function(dt)
 end
 
 o.draw = function()
-	local x1 = W.getWidth() * 0.125
-	local x2 = W.getWidth() * 0.75
+	local x1 = G.getWidth() * 0.125
+	local x2 = G.getWidth() * 0.75
 	local y1 = 160
 	local rectX1 = x1 - 16
 	local text = o.text

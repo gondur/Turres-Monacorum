@@ -56,14 +56,14 @@ o.draw = function()
 		local x = 0
 		local y = 48 + i * 48
 		love.graphics.setColor(r, g, b, 255)
-		love.graphics.printf(o.names[i], x, y, W.getWidth(), "center")
+		love.graphics.printf(o.names[i], x, y, G.getWidth(), "center")
 	end
 
 	--external libraries and other
 	love.graphics.setFont(o.externalLibsFont)
 	for i = #o.otherText, 1, -1 do
-		local x = W.getWidth()*.7
-		local y = W.getHeight() - (#o.otherText -i + 2) * o.externalLibsFontSize
+		local x = G.getWidth()*.7
+		local y = G.getHeight() - (#o.otherText -i + 2) * o.externalLibsFontSize
 		love.graphics.setColor(75, 75, 75, 255)
 		love.graphics.print(o.otherText[i], x, y)
 	end

@@ -17,9 +17,9 @@ o.draw = function()
 		love.postshader.addEffect("monochrom", 127, 191, 255, 0.2)
 		G.setFont(FONT)
 		G.setColor(255, 127, 0, 127)
-		G.printf("Stage clear!", 0, 240, W.getWidth(), "center")
+		G.printf("Stage clear!", 0, 240, G.getWidth(), "center")
 		G.setColor(255, 255, 255, 127)
-		G.printf("Click to go to the main menu", 0, 320, W.getWidth(), "center")
+		G.printf("Click to go to the main menu", 0, 320, G.getWidth(), "center")
 		end
 end
 

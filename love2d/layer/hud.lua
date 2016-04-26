@@ -18,9 +18,9 @@ function love.turris.newHudLayer(player)
 
   -- create gui elements
   o.guiGame = love.gui.newGui()
-  o.btnTower1 = o.guiGame.newImageRadioButton(208 * 0 + 16, W.getHeight() - 75, 192, 57, o.iconTower1)
-  o.btnTower2 = o.guiGame.newImageRadioButton(208 * 1 + 16, W.getHeight() - 75, 192, 57, o.iconTower2)
-  o.btnTower3 = o.guiGame.newImageRadioButton(208 * 2 + 16, W.getHeight() - 75, 192, 57, o.iconTower3)
+  o.btnTower1 = o.guiGame.newImageRadioButton(208 * 0 + 16, G.getHeight() - 75, 192, 57, o.iconTower1)
+  o.btnTower2 = o.guiGame.newImageRadioButton(208 * 1 + 16, G.getHeight() - 75, 192, 57, o.iconTower2)
+  o.btnTower3 = o.guiGame.newImageRadioButton(208 * 2 + 16, G.getHeight() - 75, 192, 57, o.iconTower3)
 
   -- config gui elements
   --o.btnTower1.setFontSize(16)
@@ -94,14 +94,14 @@ function love.turris.newHudLayer(player)
     G.setLineWidth(4)
     if not lightWorld.optionGlow then
       G.setColor(0, 0, 0, 91)
-      G.rectangle("line", W.getWidth() - 352, 16, 160, 36)
-      G.printf(math.floor(mass), W.getWidth() - 352 + 2, 16 + 2, 128, "right")
-      G.draw(o.iconMass, W.getWidth() - 208 + 2, 34 + 2, love.timer.getTime() * 0.5, 1, 1, 8, 8)
+      G.rectangle("line", G.getWidth() - 352, 16, 160, 36)
+      G.printf(math.floor(mass), G.getWidth() - 352 + 2, 16 + 2, 128, "right")
+      G.draw(o.iconMass, G.getWidth() - 208 + 2, 34 + 2, love.timer.getTime() * 0.5, 1, 1, 8, 8)
 
-      G.rectangle("line", W.getWidth() - 176, 16, 160, 36)
-      G.printf(math.floor(energy), W.getWidth() - 176 + 2, 16 + 2, 128, "right")
+      G.rectangle("line", G.getWidth() - 176, 16, 160, 36)
+      G.printf(math.floor(energy), G.getWidth() - 176 + 2, 16 + 2, 128, "right")
       G.setColor(0, 0, 0, 91 + math.sin(love.timer.getTime() * 5.0) * 63)
-      G.draw(o.iconEnergy, W.getWidth() - 40 + 2, 16 + 2)
+      G.draw(o.iconEnergy, G.getWidth() - 40 + 2, 16 + 2)
     end
 
     G.setFont(FONT)
@@ -111,31 +111,31 @@ function love.turris.newHudLayer(player)
     -- mass level
     if not turGame.disableUI.massDisplayDisabled then
       G.setColor(massColour)
-      G.rectangle("line", W.getWidth() - 352, 16, 160, 36)
+      G.rectangle("line", G.getWidth() - 352, 16, 160, 36)
       G.setColor(massLevelFillColour)
-      G.rectangle("fill", W.getWidth() - 352, 16, 160, 36)
+      G.rectangle("fill", G.getWidth() - 352, 16, 160, 36)
       G.setColor(massColour, 255)
       if mass <= 1 then
         G.setColor(alarmColour,255)
       end
-      G.printf(math.floor(mass), W.getWidth() - 352, 16, 128, "right")
-      G.draw(o.iconMass, W.getWidth() - 208, 34, love.timer.getTime() * 0.5, 1, 1, 8, 8)
+      G.printf(math.floor(mass), G.getWidth() - 352, 16, 128, "right")
+      G.draw(o.iconMass, G.getWidth() - 208, 34, love.timer.getTime() * 0.5, 1, 1, 8, 8)
     end
 
 
     -- energy level
     if not turGame.disableUI.energyDisplayDisabled then
       G.setColor(energyColour)
-      G.rectangle("line", W.getWidth() - 176, 16, 160, 36)
+      G.rectangle("line", G.getWidth() - 176, 16, 160, 36)
       G.setColor(energyLevelFillColour)
-      G.rectangle("fill", W.getWidth() - 176, 16, 160, 36)
+      G.rectangle("fill", G.getWidth() - 176, 16, 160, 36)
       G.setColor(energyColour, 255)
       if energy <= 1 then
         G.setColor(alarmColour,255)
       end
-      G.printf(math.floor(energy), W.getWidth() - 176, 16, 128, "right")
+      G.printf(math.floor(energy), G.getWidth() - 176, 16, 128, "right")
       G.setColor(energyColour, 191 + math.sin(love.timer.getTime() * 5.0) * 63)
-      G.draw(o.iconEnergy, W.getWidth() - 40, 16)
+      G.draw(o.iconEnergy, G.getWidth() - 40, 16)
     end
 
 
@@ -154,10 +154,10 @@ function love.turris.newHudLayer(player)
       else
         G.setColor(laserColour, 31)
       end
-      G.rectangle("fill", 208 * 0 + 16, W.getHeight() - 108, 192, 28)
+      G.rectangle("fill", 208 * 0 + 16, G.getHeight() - 108, 192, 28)
       G.setFont(o.fontTitle)
       G.setColor(0, 0, 0)
-      G.printf("Laser Tower", 208 * 0 + 16, W.getHeight() - 108, 192, "center")
+      G.printf("Laser Tower", 208 * 0 + 16, G.getHeight() - 108, 192, "center")
       G.setFont(o.fontDescription)
       -- laser tower text
       if o.btnTower1.isChecked() then
@@ -165,8 +165,8 @@ function love.turris.newHudLayer(player)
       else
         G.setColor(laserColour, 127)
       end
-      G.print("Cost: "..tostring(laserTower.buildCost).." M", 208 * 0 + 88, W.getHeight() - 68)
-      G.print("Shoots laser!", 208 * 0 + 88, W.getHeight() - 44)
+      G.print("Cost: "..tostring(laserTower.buildCost).." M", 208 * 0 + 88, G.getHeight() - 68)
+      G.print("Shoots laser!", 208 * 0 + 88, G.getHeight() - 44)
     end
 
     if turGame.disableUI.energyTowerDisplayDisabled then
@@ -181,10 +181,10 @@ function love.turris.newHudLayer(player)
       else
         G.setColor(energyColour, 31)
       end
-      G.rectangle("fill", 208 * 1 + 16, W.getHeight() - 108, 192, 28)
+      G.rectangle("fill", 208 * 1 + 16, G.getHeight() - 108, 192, 28)
       G.setFont(o.fontTitle)
       G.setColor(0, 0, 0)
-      G.printf("Energy Tower", 208 * 1 + 16, W.getHeight() - 108, 192, "center")
+      G.printf("Energy Tower", 208 * 1 + 16, G.getHeight() - 108, 192, "center")
       -- energy tower text
       G.setFont(o.fontDescription)
       if o.btnTower2.isChecked() then
@@ -192,8 +192,8 @@ function love.turris.newHudLayer(player)
       else
         G.setColor(energyColour, 127)
       end
-      G.print("Cost: "..tostring(energyTower.buildCost).." M", 208 * 1 + 88, W.getHeight() - 68)
-      G.print("Gives energy", 208 * 1 + 88, W.getHeight() - 44)
+      G.print("Cost: "..tostring(energyTower.buildCost).." M", 208 * 1 + 88, G.getHeight() - 68)
+      G.print("Gives energy", 208 * 1 + 88, G.getHeight() - 44)
     end
 
     if turGame.disableUI.massTowerDisplayDisabled then
@@ -208,12 +208,12 @@ function love.turris.newHudLayer(player)
       else
         G.setColor(massColour, 31)
       end
-      G.rectangle("fill", 208 * 2 + 16, W.getHeight() - 108, 192, 28)
+      G.rectangle("fill", 208 * 2 + 16, G.getHeight() - 108, 192, 28)
 
       --button header titles
       G.setFont(o.fontTitle)
       G.setColor(0, 0, 0)
-      G.printf("Mass Tower", 208 * 2 + 16, W.getHeight() - 108, 192, "center")
+      G.printf("Mass Tower", 208 * 2 + 16, G.getHeight() - 108, 192, "center")
 
       -- mass tower text
       if o.btnTower3.isChecked() then
@@ -222,8 +222,8 @@ function love.turris.newHudLayer(player)
         G.setColor(massColour, 127)
       end
       G.setFont(o.fontDescription)
-      G.print("Cost: "..tostring(massTower.buildCost).." M", 208 * 2 + 88, W.getHeight() - 68)
-      G.print("Extracts M", 208 * 2 + 88, W.getHeight() - 44)
+      G.print("Cost: "..tostring(massTower.buildCost).." M", 208 * 2 + 88, G.getHeight() - 68)
+      G.print("Extracts M", 208 * 2 + 88, G.getHeight() - 44)
 
     end
     -- draws buttons

@@ -46,6 +46,18 @@ love.postshader.setBuffer = function(path)
 	LOVE_POSTSHADER_LAST_BUFFER = love.graphics.getCanvas()
 end
 
+love.postshader.drawOntoSelf = function(shader)
+  local temp = love.graphics.newCanvas();
+  local canvas = love.graphics.getCanvas();
+
+  love.graphics.setCanvas(temp);
+  love.graphics.draw(canvas);
+
+  love.graphics.setCanvas(canvas);
+  love.graphics.setShader(shader);
+  love.graphics.draw(temp);
+end
+
 love.postshader.addEffect = function(shader, ...)
 	args = {...}
 	LOVE_POSTSHADER_LAST_BUFFER = love.graphics.getCanvas()
@@ -55,40 +67,53 @@ love.postshader.addEffect = function(shader, ...)
 
 	if shader == "bloom" then
 		-- Bloom Shader
-		LOVE_POSTSHADER_BLURV:send("screen", {love.window.getWidth(), love.window.getHeight()})
-		LOVE_POSTSHADER_BLURH:send("screen", {love.window.getWidth(), love.window.getHeight()})
+		LOVE_POSTSHADER_BLURV:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
+		LOVE_POSTSHADER_BLURH:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
 		LOVE_POSTSHADER_BLURV:send("steps", args[1] or 2.0)
 		LOVE_POSTSHADER_BLURH:send("steps", args[1] or 2.0)
+
+		-- love.graphics.setShader(LOVE_POSTSHADER_BLURV)
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
+
+		-- love.graphics.setShader(LOVE_POSTSHADER_BLURH)
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+
+		-- love.graphics.setShader(LOVE_POSTSHADER_CONTRAST)
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
 
 		love.graphics.setShader(LOVE_POSTSHADER_BLURV)
 		love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
 
-		love.graphics.setShader(LOVE_POSTSHADER_BLURH)
-		love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+    love.postshader.drawOntoSelf(LOVE_POSTSHADER_BLURH);
 
-		love.graphics.setShader(LOVE_POSTSHADER_CONTRAST)
-		love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+    love.postshader.drawOntoSelf(LOVE_POSTSHADER_CONTRAST);
 
 		love.graphics.setCanvas(LOVE_POSTSHADER_LAST_BUFFER)
 		love.graphics.setShader()
 		love.graphics.setColor(255, 255, 255)
-		love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
-		love.graphics.setBlendMode("additive")
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
+
+    love.postshader.drawOntoSelf();
+
+		love.graphics.setBlendMode("add")
 		love.graphics.setColor(255, 255, 255, (args[2] or 0.25) * 255)
 		love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
 		love.graphics.setBlendMode("alpha")
 	elseif shader == "blur" then
 		-- Blur Shader
-		LOVE_POSTSHADER_BLURV:send("screen", {love.window.getWidth(), love.window.getHeight()})
-		LOVE_POSTSHADER_BLURH:send("screen", {love.window.getWidth(), love.window.getHeight()})
+		LOVE_POSTSHADER_BLURV:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
+		LOVE_POSTSHADER_BLURH:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
 		LOVE_POSTSHADER_BLURV:send("steps", args[1] or 2.0)
 		LOVE_POSTSHADER_BLURH:send("steps", args[2] or 2.0)
 
 		love.graphics.setShader(LOVE_POSTSHADER_BLURV)
 		love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
 
-		love.graphics.setShader(LOVE_POSTSHADER_BLURH)
-		love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+		-- love.graphics.setShader(LOVE_POSTSHADER_BLURH)
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+
+    love.postshader.drawOntoSelf(LOVE_POSTSHADER_BLURH);
+
 	elseif shader == "chromatic" then
 		-- Chromatic Shader
 		LOVE_POSTSHADER_CHROMATIC_ABERRATION:send("redStrength", {args[1] or 0.0, args[2] or 0.0})
@@ -121,27 +146,30 @@ love.postshader.addEffect = function(shader, ...)
 		love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
 	elseif shader == "scanlines" then
 		-- Scanlines Shader
-		LOVE_POSTSHADER_SCANLINES:send("screen", {love.window.getWidth(), love.window.getHeight()})
+		LOVE_POSTSHADER_SCANLINES:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
 		LOVE_POSTSHADER_SCANLINES:send("strength", args[1] or 2.0)
 		LOVE_POSTSHADER_SCANLINES:send("time", args[2] or love.timer.getTime())
 		love.graphics.setShader(LOVE_POSTSHADER_SCANLINES)
 		love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
 	elseif shader == "tiltshift" then
 		-- Blur Shader
-		LOVE_POSTSHADER_BLURV:send("screen", {love.window.getWidth(), love.window.getHeight()})
-		LOVE_POSTSHADER_BLURH:send("screen", {love.window.getWidth(), love.window.getHeight()})
+		LOVE_POSTSHADER_BLURV:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
+		LOVE_POSTSHADER_BLURH:send("screen", {love.graphics.getWidth(), love.graphics.getHeight()})
 		LOVE_POSTSHADER_BLURV:send("steps", args[1] or 2.0)
 		LOVE_POSTSHADER_BLURH:send("steps", args[1] or 2.0)
 
 		love.graphics.setShader(LOVE_POSTSHADER_BLURV)
 		love.graphics.draw(LOVE_POSTSHADER_BUFFER_RENDER)
 
-		love.graphics.setShader(LOVE_POSTSHADER_BLURH)
-		love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+		-- love.graphics.setShader(LOVE_POSTSHADER_BLURH)
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+    love.postshader.drawOntoSelf(LOVE_POSTSHADER_BLURH);
 
 		LOVE_POSTSHADER_TILT_SHIFT:send("imgBuffer", LOVE_POSTSHADER_BUFFER_RENDER)
-		love.graphics.setShader(LOVE_POSTSHADER_TILT_SHIFT)
-		love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+
+		-- love.graphics.setShader(LOVE_POSTSHADER_TILT_SHIFT)
+		-- love.graphics.draw(LOVE_POSTSHADER_BUFFER_BACK)
+    love.postshader.drawOntoSelf(LOVE_POSTSHADER_TILT_SHIFT);
 	end
 
 	if shader ~= "bloom" then

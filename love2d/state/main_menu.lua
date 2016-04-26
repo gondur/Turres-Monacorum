@@ -1,6 +1,6 @@
 local o = {}
 
-local startx = love.window.getWidth() * 0.5 - 176 * 0.5
+local startx = love.graphics.getWidth() * 0.5 - 176 * 0.5
 local starty = 162
 
 o.imgLogo			= love.graphics.newImage("gfx/menu/logo.png")
@@ -63,17 +63,17 @@ o.draw = function()
 	love.graphics.setColor(255, 255, 255, 223)
 	love.graphics.draw(o.imgBackground)
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 255)
-	love.graphics.setBlendMode("additive")
-	love.graphics.draw(o.imgMiddleground,(love.window.getWidth() - o.imgMiddleground:getWidth()) * 0.5, 0)
+	love.graphics.setBlendMode("add")
+	love.graphics.draw(o.imgMiddleground,(love.graphics.getWidth() - o.imgMiddleground:getWidth()) * 0.5, 0)
 	love.graphics.setColor(255, 255, 255)
 	love.graphics.setBlendMode("alpha")
-	love.graphics.draw(o.imgLogo, love.window.getWidth() * 0.5, o.imgLogo:getHeight() * 0.5, math.sin(o.effectTimer * 4) * 0.05 * math.max(0, 2 - o.effectTimer ^ 0.5), 1, 1, o.imgLogo:getWidth() * 0.5, o.imgLogo:getHeight() * 0.5)
+	love.graphics.draw(o.imgLogo, love.graphics.getWidth() * 0.5, o.imgLogo:getHeight() * 0.5, math.sin(o.effectTimer * 4) * 0.05 * math.max(0, 2 - o.effectTimer ^ 0.5), 1, 1, o.imgLogo:getWidth() * 0.5, o.imgLogo:getHeight() * 0.5)
 
 	o.guiMenu.draw()
 
 	love.graphics.setFont(o.fontVersion)
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 255)
-	love.graphics.print(o.version, love.window.getWidth() - 64, love.window.getHeight() - 32)
+	love.graphics.print(o.version, love.graphics.getWidth() - 64, love.graphics.getHeight() - 32)
 
 	if math.random(0, love.timer.getFPS() * 5) == 0 then
 		o.chromaticEffect = math.random(0, 5) * 0.1
@@ -92,7 +92,7 @@ o.setVersion = function(version)
 end
 
 o.refreshScreenSize = function()
-	local startx = love.window.getWidth() * 0.5 - 176 * 0.5
+	local startx = love.graphics.getWidth() * 0.5 - 176 * 0.5
 	local starty = 162
 
 	o.btnStart.setPosition(startx, starty + 82 * 0)

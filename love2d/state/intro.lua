@@ -4,11 +4,13 @@ o.imgBackground0	= love.graphics.newImage("gfx/love_bg.png")
 o.imgBackground0:setWrap("repeat", "repeat")
 o.vertBackground0 = {
 	{ 0, 0, 0, 0, 255, 255, 255, 63 },
-	{ love.window.getWidth(), 0, love.window.getWidth() / o.imgBackground0:getWidth(), 0, 255, 255, 255, 63 },
-	{ love.window.getWidth(), love.window.getHeight(), love.window.getWidth() / o.imgBackground0:getWidth(), love.window.getHeight() / o.imgBackground0:getHeight(), 255, 255, 255, 127 },
-	{ 0, love.window.getHeight(), 0, love.window.getHeight() / o.imgBackground0:getHeight(), 255, 255, 255, 127 },
+	{ love.graphics.getWidth(), 0, love.graphics.getWidth() / o.imgBackground0:getWidth(), 0, 255, 255, 255, 63 },
+	{ love.graphics.getWidth(), love.graphics.getHeight(), love.graphics.getWidth() / o.imgBackground0:getWidth(), love.graphics.getHeight() / o.imgBackground0:getHeight(), 255, 255, 255, 127 },
+	{ 0, love.graphics.getHeight(), 0, love.graphics.getHeight() / o.imgBackground0:getHeight(), 255, 255, 255, 127 },
 }
-o.mshBackground0 	= love.graphics.newMesh(o.vertBackground0, o.imgBackground0, "fan")
+o.mshBackground0 	= love.graphics.newMesh(o.vertBackground0, "fan", "static")
+o.mshBackground0:setTexture(o.imgBackground0)
+
 o.imgBackground1	= love.graphics.newImage("gfx/love_logo.png")
 o.imgBackground2	= love.graphics.newImage("gfx/world.png")
 o.phase = 2
@@ -40,12 +42,12 @@ o.source = ""
 
 o.draw = function()
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 63)
-	love.graphics.draw(o.imgBackground2, love.window.getWidth() * 0.5 - o.imgBackground2:getWidth() * 0.5)
+	love.graphics.draw(o.imgBackground2, love.graphics.getWidth() * 0.5 - o.imgBackground2:getWidth() * 0.5)
 
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 127)
 	love.graphics.setFont(o.fontTitle)
-	love.graphics.printf(o.quote, love.window.getWidth() * 0.125, love.window.getHeight() * 0.5 - 48, love.window.getWidth() * 0.75, "center")
-	love.graphics.printf(o.source, love.window.getWidth() * 0.125, love.window.getHeight() * 0.5 + 48, love.window.getWidth() * 0.75, "center")
+	love.graphics.printf(o.quote, love.graphics.getWidth() * 0.125, love.graphics.getHeight() * 0.5 - 48, love.graphics.getWidth() * 0.75, "center")
+	love.graphics.printf(o.source, love.graphics.getWidth() * 0.125, love.graphics.getHeight() * 0.5 + 48, love.graphics.getWidth() * 0.75, "center")
 
 	if math.random(0, love.timer.getFPS() * 8) == 0 then
 		o.chromaticEffect = math.random(0, 5) * 0.1

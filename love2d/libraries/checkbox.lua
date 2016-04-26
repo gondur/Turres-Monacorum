@@ -44,7 +44,7 @@ function love.gui.newCheckbox(x, y, width, height, checked, text)
 				G.printf(o.text, o.x + 2, o.y + 6, o.width, "left")
 				G.setLineWidth(4)
 				G.rectangle("line", o.x + o.width - o.height, o.y, o.height, o.height)
-				G.setBlendMode("additive")
+				G.setBlendMode("add")
 
 				if o.hover then
 					G.setColor(o.colorHover[1], o.colorHover[2], o.colorHover[3], o.colorHover[4])

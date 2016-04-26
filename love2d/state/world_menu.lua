@@ -2,7 +2,7 @@ local o = {}
 
 o.imgBackground	= love.graphics.newImage("gfx/world.png")
 
-o.startx = love.window.getWidth() * 0.5 - o.imgBackground:getWidth() * 0.5
+o.startx = love.graphics.getWidth() * 0.5 - o.imgBackground:getWidth() * 0.5
 o.starty = 128
 
 o.fontTitle = love.graphics.newFont(24)
@@ -48,7 +48,7 @@ o.init = function()
 		end
 	end
 
-	o.btnBack = o.guiMenu.newButton(love.window.getWidth() - 192, love.window.getHeight() - 48, 176, 34, "Back")
+	o.btnBack = o.guiMenu.newButton(love.graphics.getWidth() - 192, love.graphics.getHeight() - 48, 176, 34, "Back")
 end
 
 o.reset = function()
@@ -85,18 +85,18 @@ end
 o.draw = function()
 	love.graphics.setBlendMode("alpha")
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 255)
-	love.graphics.draw(o.imgBackground, love.window.getWidth() * 0.5 - o.imgBackground:getWidth() * 0.5)
+	love.graphics.draw(o.imgBackground, love.graphics.getWidth() * 0.5 - o.imgBackground:getWidth() * 0.5)
 	love.graphics.setColor(255, 127, 0)
-	love.graphics.printf("Missions", 0, 24, love.window.getWidth(), "center")
+	love.graphics.printf("Missions", 0, 24, love.graphics.getWidth(), "center")
 
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 255)
 	if o.selDescription then
 		love.graphics.setFont(o.fontTitle)
-		love.graphics.print(o.description[o.selDescription][1], love.window.getWidth() - 256, 72)
-		love.graphics.line(love.window.getWidth() - 272, 112, love.window.getWidth() - 16, 112)
+		love.graphics.print(o.description[o.selDescription][1], love.graphics.getWidth() - 256, 72)
+		love.graphics.line(love.graphics.getWidth() - 272, 112, love.graphics.getWidth() - 16, 112)
 		love.graphics.setFont(o.fontDescription)
 		for i = 2, #o.description[o.selDescription] do
-			love.graphics.print(o.description[o.selDescription][i], love.window.getWidth() - 256, (i - 1) * 24 + 104)
+			love.graphics.print(o.description[o.selDescription][i], love.graphics.getWidth() - 256, (i - 1) * 24 + 104)
 		end
 	end
 
@@ -120,7 +120,7 @@ o.setVersion = function(version)
 end
 
 o.refreshScreenSize = function()
-	o.startx = love.window.getWidth() * 0.5 - o.imgBackground:getWidth() * 0.5
+	o.startx = love.graphics.getWidth() * 0.5 - o.imgBackground:getWidth() * 0.5
 	o.starty = 128
 end
 

@@ -109,7 +109,8 @@ function love.turris.newGame()
       { 0, o.imgLaser:getHeight(), 0, 1, 255, 255, 0 },
     }
 
-    o.mshLaser = love.graphics.newMesh(vertices, o.imgLaser, "fan")
+    o.mshLaser = love.graphics.newMesh(vertices,"fan")
+    o.mshLaser:setTexture(o.imgLaser)
 
     o.imgPath = G.newImage("gfx/path_arrow.png")
     o.imgPath:setWrap("repeat", "repeat")
@@ -121,7 +122,8 @@ function love.turris.newGame()
       { 0, o.imgPath:getHeight(), 0, 1, 255, 255, 0 },
     }
 
-    o.mshPath = love.graphics.newMesh(vertices, o.imgPath, "fan")
+    o.mshPath = love.graphics.newMesh(vertices, "fan")
+    o.mshPath:setTexture(o.imgPath)
 
     o.layerHud = love.turris.newHudLayer(o.player)
     o.layerGameOver = require("layer/gameover")
@@ -195,7 +197,7 @@ function love.turris.newGame()
   end
 
   o.updateCamera = function(dt)
-    if love.mouse.isDown("m") then
+    if love.mouse.isDown(3) then
       if holdOffset then
         o.offsetX = o.offsetX - (holdOffsetX - love.mouse.getX())
         o.offsetY = o.offsetY - (holdOffsetY - love.mouse.getY())
@@ -227,39 +229,39 @@ function love.turris.newGame()
         if love.mouse.getX() < border then
           o.offsetX = o.offsetX + dt * (border - love.mouse.getX()) ^ 1.5
           o.offsetChange = true
-        elseif love.mouse.getX() > W.getWidth() - border then
-          o.offsetX = o.offsetX - dt * (border - (W.getWidth() - love.mouse.getX())) ^ 1.5
+        elseif love.mouse.getX() > G.getWidth() - border then
+          o.offsetX = o.offsetX - dt * (border - (G.getWidth() - love.mouse.getX())) ^ 1.5
           o.offsetChange = true
         end
 
         if love.mouse.getY() < border then
           o.offsetY = o.offsetY + dt * (border - love.mouse.getY()) ^ 1.5
           o.offsetChange = true
-        elseif love.mouse.getY() > W.getHeight() - border then
-          o.offsetY = o.offsetY - dt * (border - (W.getHeight() - love.mouse.getY())) ^ 1.5
+        elseif love.mouse.getY() > G.getHeight() - border then
+          o.offsetY = o.offsetY - dt * (border - (G.getHeight() - love.mouse.getY())) ^ 1.5
           o.offsetChange = true
         end
       end
     end
 
-    if turMap.getWidth() * turMap.getTileWidth() > W.getWidth() then
+    if turMap.getWidth() * turMap.getTileWidth() > G.getWidth() then
       if o.offsetX > 0 then
         o.offsetX = 0
-      elseif o.offsetX < W.getWidth() - turMap.getWidth() * turMap.getTileWidth() then
-        o.offsetX = W.getWidth() - turMap.getWidth() * turMap.getTileWidth()
+      elseif o.offsetX < G.getWidth() - turMap.getWidth() * turMap.getTileWidth() then
+        o.offsetX = G.getWidth() - turMap.getWidth() * turMap.getTileWidth()
       end
     else
-      o.offsetX = W.getWidth() * 0.5 - turMap.getWidth() * turMap.getTileWidth() * 0.5
+      o.offsetX = G.getWidth() * 0.5 - turMap.getWidth() * turMap.getTileWidth() * 0.5
     end
 
-    if turMap.getHeight() * turMap.getTileHeight() > W.getHeight() then
+    if turMap.getHeight() * turMap.getTileHeight() > G.getHeight() then
       if o.offsetY > 0 then
         o.offsetY = 0
-      elseif o.offsetY < W.getHeight() - turMap.getHeight() * turMap.getTileHeight() then
-        o.offsetY = W.getHeight() - turMap.getHeight() * turMap.getTileHeight()
+      elseif o.offsetY < G.getHeight() - turMap.getHeight() * turMap.getTileHeight() then
+        o.offsetY = G.getHeight() - turMap.getHeight() * turMap.getTileHeight()
       end
     else
-      o.offsetY = W.getHeight() * 0.5 - turMap.getHeight() * turMap.getTileHeight() * 0.5
+      o.offsetY = G.getHeight() * 0.5 - turMap.getHeight() * turMap.getTileHeight() * 0.5
     end
 
     holdOffsetX = love.mouse.getX()

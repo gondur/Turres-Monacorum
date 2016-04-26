@@ -210,7 +210,7 @@ function love.draw()
 	W.setTitle("FPS: " .. love.timer.getFPS())
 	love.postshader.setBuffer("render")
 	G.setColor(0, 0, 0)
-	G.rectangle("fill", 0, 0, W.getWidth(), W.getHeight())
+	G.rectangle("fill", 0, 0, G.getWidth(), G.getHeight())
 
 	if secondarygamestate.drawOK then
 		if(currentgamestate == 0) then --render main menu only

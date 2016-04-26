@@ -75,7 +75,8 @@ function love.turris.newMap(path)
 		}
 	end
 
-	o.mshGround = love.graphics.newMesh(vertices, o.ground, "fan")
+	o.mshGround = love.graphics.newMesh(vertices, "fan", "static");
+  o.mshGround:setTexture(o.ground);
 
 	local normal = love.graphics.newImage("gfx/" .. o.groundImg .. "_normal.png")
 	local glow = love.graphics.newImage("gfx/" .. o.groundImg .. "_glow.png")

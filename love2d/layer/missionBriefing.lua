@@ -5,7 +5,7 @@ o.text = ""
 o.guiMenu = love.gui.newGui()
 o.init = function(mission)
 	o.text = mission.briefingText or mission.description
-	o.btnOkay = o.guiMenu.newButton(W.getWidth() * 0.5 - 16, 364, 66, 42, "OK")
+	o.btnOkay = o.guiMenu.newButton(G.getWidth() * 0.5 - 16, 364, 66, 42, "OK")
 	o.mission = mission
 	turGame.map.editMode = false;
 end
@@ -20,8 +20,8 @@ o.update = function(dt)
 end
 
 o.draw = function()
-	local x1 = W.getWidth() * 0.125
-	local x2 = W.getWidth() * 0.75
+	local x1 = G.getWidth() * 0.125
+	local x2 = G.getWidth() * 0.75
 	local y1 = 160
 	local rectX1 = x1 - 16
 	local text = o.text

@@ -1,6 +1,6 @@
 local o = {}
 
-local startx = love.window.getWidth() * 0.5 - 191 * 0.5
+local startx = love.graphics.getWidth() * 0.5 - 191 * 0.5
 local starty = 80
 
 o.imgBackground		= love.graphics.newImage("gfx/menu/menu_background.png")
@@ -63,15 +63,15 @@ o.draw = function()
 	love.graphics.setColor(255, 255, 255, 223)
 	love.graphics.draw(o.imgBackground)
 	love.graphics.setColor(95 + math.sin(o.effectTimer * 0.1) * 63, 191 + math.cos(o.effectTimer) * 31, 223 + math.sin(o.effectTimer) * 31, 255)
-	love.graphics.setBlendMode("additive")
-	love.graphics.draw(o.imgMiddleground,(love.window.getWidth()-o.imgMiddleground:getWidth())*0.5,0)
+	love.graphics.setBlendMode("add")
+	love.graphics.draw(o.imgMiddleground,(love.graphics.getWidth()-o.imgMiddleground:getWidth())*0.5,0)
 
 	love.graphics.setBlendMode("alpha")
 	love.graphics.setColor(0, 0, 0, 95)
-	love.graphics.printf("Audio", 4, 24 + 4, love.window.getWidth(), "center")
+	love.graphics.printf("Audio", 4, 24 + 4, love.graphics.getWidth(), "center")
 	love.graphics.setColor(255, 127, 0)
-	love.graphics.setBlendMode("additive")
-	love.graphics.printf("Audio", 0, 24, love.window.getWidth(), "center")
+	love.graphics.setBlendMode("add")
+	love.graphics.printf("Audio", 0, 24, love.graphics.getWidth(), "center")
 
 	love.graphics.setFont(o.fontOption)
 	o.guiMenu.draw()
@@ -89,7 +89,7 @@ o.draw = function()
 end
 
 o.refreshScreenSize = function()
-	local startx = love.window.getWidth() * 0.5 - 191 * 0.5
+	local startx = love.graphics.getWidth() * 0.5 - 191 * 0.5
 	local starty = 80
 
 	o.chkMusic.setPosition(startx, starty + 64 * 0)
