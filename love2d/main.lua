@@ -288,17 +288,13 @@ function love.keypressed(key, code)
 end
 
 function love.mousepressed(x, y, key)
-	if(key == "l") then
-		buttonDetected = 1
+	if(key == 1) then
 		love.turris.checkleftclick(x,y)
 	end
-	if(key == "m") then
-		buttonDetected = 3
-	end
-	if(key == "r") then
-		buttonDetected = 2
+	if(key == 2) then
 		love.turris.checkrightclick(x,y)
 	end
+  buttonDetected = key
 end
 
 function love.mousereleased(x, y, key)
