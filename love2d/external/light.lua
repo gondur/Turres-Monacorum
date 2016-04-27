@@ -192,7 +192,7 @@ function love.light.newWorld()
 						love.graphics.clear(255, 255, 255)
 						love.graphics.setBlendMode("alpha")
 						love.graphics.stencil(polyStencil, "replace", 1)
-            love.graphics.setStencilTest("equal", 0)
+            love.graphics.setStencilTest("greater", 0)
 						love.graphics.rectangle("fill", LOVE_LIGHT_TRANSLATE_X, LOVE_LIGHT_TRANSLATE_Y, love.graphics.getWidth(), love.graphics.getHeight())
 
 						lightsOnScreen = lightsOnScreen + 1
