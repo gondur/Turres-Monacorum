@@ -135,7 +135,7 @@ function love.setgamestate(newgamestate, option)
 		turGame.layerCountdown.init()
 	elseif newgamestate == 16 then
 		love.turris.reinit(option.map)
-		turGame.layerMissionBriefing.init(option) 
+		turGame.layerMissionBriefing.init(option)
 	end
 
 	if currentgamestate == 5 then
