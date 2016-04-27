@@ -39,8 +39,8 @@ end
 
 o.draw = function()
 	if lightWorld.optionGlow then
-		lightWorld.glowMap:clear()
 		lightWorld.setBuffer("glow")
+    love.graphics.clear()
 	end
 
 	love.graphics.setColor(255, 255, 255, 31)
